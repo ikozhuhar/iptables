@@ -1,3 +1,3 @@
 <p align="center">
-<img src="https://github.com/ikozhuhar/ketov/blob/main/img/ketov-linux.png">
+<img src="https://github.com/ikozhuhar/iptables/blob/main/img/iptables.jpeg">
 </p>
