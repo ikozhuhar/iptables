@@ -47,6 +47,10 @@
 ```ruby
 # Посмотреть правила
 iptables -nvL --line
+iptables-save
+
+# Разрешить трафик на lo интерфейс
+iptables -I INPUT -i lo -j ACCEPT
 
 # Разрешить входящий трафик на 22 порт
 iptables -A INPUT -p tcp --dport=22 -j ACCEPT
