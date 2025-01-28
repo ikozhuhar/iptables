@@ -108,7 +108,7 @@ iptables-save > ./iptables.rules
 iptables-restore < ./iptables.rules
 ```
 
-_Постоянно🥇
+_Постоянно:_
 ```ruby
 apt install iptables-persistent netfilter-persistent
 netfilter-persistent save
