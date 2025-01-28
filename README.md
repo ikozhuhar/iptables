@@ -114,3 +114,6 @@ apt install iptables-persistent netfilter-persistent
 netfilter-persistent save
 netfilter-persistent start
 ```
+
+
+https://interface31.ru/tech_it/2021/02/nastraivaem-port-knocking-v-linux-debian-ubuntu.html
