@@ -49,6 +49,11 @@
 iptables -nvL --line
 iptables-save
 
+# Разрешить пинг
+iptables -A INPUT -p icmp -j ACCEPT
+# Запретить ответ на пинг
+iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+
 # Разрешить трафик на lo интерфейс
 iptables -I INPUT -i lo -j ACCEPT
 
