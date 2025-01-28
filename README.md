@@ -78,6 +78,8 @@ iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 # Трафик tcp на порт 9022 транслировать на адрес 192.168.56.6 и порт 22
 iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
 ```
+![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
+
 
 ### Состояние пакетов
 
