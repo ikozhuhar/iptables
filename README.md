@@ -1,3 +1,84 @@
 <p align="center">
 <img src="https://github.com/ikozhuhar/iptables/blob/main/img/iptables.jpeg">
 </p>
+
+### Команды iptables
+
+| Команды | Описание |
+| ------- | ----------- |
+| `iptables -L` | просмотр списка правил |
+| `iptables -F` | сброс правил (политика остаётся) |
+| `iptables -P` | установка политики по умолчанию |
+| `iptables -I` | вставить правило в начало списка |
+| `iptables -A` | добавить правило в конец списка |
+| `iptables -D` | удалить правило |
+
+
+### Критерии правил в iptables
+
+| Команды | Описание |
+| ------- | ----------- |
+| `-p` | проколол |
+| `-i` | интерфейс источника |
+| `-o` | интерфейс назначения |
+| `-s` | адрес источника |
+| `--dport` | порт назначения |
+| `--sport` | порт источника |
+| `-m multiport --dports` | несколько портов назначения |
+| `-m conntrack --ctstate` | статус соединения (или ранее -m state --state) |
+| `--icmp-type` | тип ICMP-сообщения |
+| `-j` | действие |
+
+
+
+### Действия с пакетами — target, jump (-j)
+
+| Команды | Описание |
+| ------- | ----------- |
+| `ACCEPT` | разрешить |
+| `DROP` | выкинуть |
+| `REJECT` | отклонить |
+| `REDIRECT` | перенаправить |
+| `DNAT/SNAT` | destination/source NAT (network address translation) |
+| `LOG` | записать в лог |
+| `RETURN` | выйти из цепочки |
+
+```ruby
+# Отклонить трафик и вернуть сообщение
+iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
+iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+
+# Трафик tcp на порт 80 перенаправить на порт 8080
+iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+# Трафик tcp на порт 9022 транслировать на адрес 192.168.56.6 и порт 22
+iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
+```
+
+### Состояние пакетов
+
+| Команды | Описание |
+| ------- | ----------- |
+| `NEW` | пакет для создания нового соединения |
+| `ESTABLISHED` | пакет, принадлежащий к существующему соединению |
+| `RELATED` | пакет для создания нового соединения, но связанный с существующим (например, FTP) |
+| `INVALID` | пакет не соответствует ни одному соединению из таблицы |
+| `UNTRACKED` | пакет был помечен как неотслеживаемый в таблице raw |
+
+
+### Сохранение правил в iptables
+
+Временно:
+```
+iptables-save > ./iptables.rules
+iptables-restore < ./iptables.rules
+```
+
+Постоянно:
+```
+apt install iptables-persistent netfilter-persistent
+netfilter-persistent save
+netfilter-persistent start
+```
