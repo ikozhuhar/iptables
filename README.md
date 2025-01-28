@@ -43,6 +43,7 @@
 | `LOG` | записать в лог |
 | `RETURN` | выйти из цепочки |
 
+Примеры:
 ```ruby
 # Отклонить трафик и вернуть сообщение
 iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
@@ -71,13 +72,13 @@ iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
 ### Сохранение правил в iptables
 
 Временно:
-```
+```ruby
 iptables-save > ./iptables.rules
 iptables-restore < ./iptables.rules
 ```
 
 Постоянно:
-```
+```ruby
 apt install iptables-persistent netfilter-persistent
 netfilter-persistent save
 netfilter-persistent start
