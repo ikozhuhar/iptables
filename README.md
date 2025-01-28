@@ -60,6 +60,12 @@ iptables -I INPUT -i lo -j ACCEPT
 # Разрешить входящий трафик на 22 порт
 iptables -A INPUT -p tcp --dport=22 -j ACCEPT
 
+# Разрешаем установленные соединения
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp --dport=80 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -p tcp --dport=443 -m conntrack --ctstate NEW -j ACCEPT
+iptables -A INPUT -p tcp -m multiport --dports 21,53,6881:6898 -j ACCEPT
+
 # Отклонить трафик и вернуть сообщение
 iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
 iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
