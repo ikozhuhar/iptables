@@ -45,6 +45,12 @@
 
 Примеры:
 ```ruby
+# Посмотреть правила
+iptables -nvL --line
+
+# Разрешить входящий трафик на 22 порт
+iptables -A INPUT -p tcp --dport=22 -j ACCEPT
+
 # Отклонить трафик и вернуть сообщение
 iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
 iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
