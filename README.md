@@ -118,7 +118,35 @@ netfilter-persistent start
 ### ipset
 
 ```
+# Установка ipset
 sudo apt install ipset
+
+# Создать (отдельные IP)
+ipset -N ddos iphash
+
+# Создать (подсети)
+ipset create blacklist nethash
+
+# Добавить подсеть
+ipset -A ddos 109.95.48.0/21
+
+# Посмотреть список
+ipset -L ddos
+
+# Проверить
+ipset test ddos 185.174.102.1
+
+# Сохранение
+sudo ipset save blacklist -f ipset-blacklist.backup
+
+# Восстановление
+sudo ipset restore -! < ipset-blacklist.backup
+
+# Очистка
+sudo ipset flush blacklist
+
+# Правило
+iptables -I PREROUTING -t raw -m set --match-set ddos src -j DROP
 ```
 ![image](https://github.com/user-attachments/assets/85d15123-35ad-4f25-8df1-8989948b1068)
 
