@@ -117,7 +117,7 @@ netfilter-persistent start
 
 ### ipset
 
-```
+```ruby
 # Установка ipset
 sudo apt install ipset
 
