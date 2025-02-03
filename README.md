@@ -115,5 +115,13 @@ netfilter-persistent save
 netfilter-persistent start
 ```
 
+### ipset
+
+```
+sudo apt install ipset
+```
+![image](https://github.com/user-attachments/assets/85d15123-35ad-4f25-8df1-8989948b1068)
+
+
 
 https://interface31.ru/tech_it/2021/02/nastraivaem-port-knocking-v-linux-debian-ubuntu.html
