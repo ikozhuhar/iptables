@@ -72,6 +72,12 @@ iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
 iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
 iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 
+# Поставить правило в седьмую позицию
+iptables -I INPUT 7 -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
+
+# Поставить правило в конец цепочки
+iptables -A INPUT -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
+
 # Трафик tcp на порт 80 перенаправить на порт 8080
 iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
