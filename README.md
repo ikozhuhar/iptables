@@ -97,6 +97,9 @@ iptables -I INPUT 2 -i lo -j ACCEPT
 iptables -nvL --line
 iptables -D INPUT 9
 
+# Сохранить правила (если используется iptables-persistent или аналоги)
+iptables-save > /etc/iptables/rules.v4
+
 ```
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
 
