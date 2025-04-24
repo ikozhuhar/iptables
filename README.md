@@ -104,6 +104,22 @@ iptables-save > /etc/iptables/rules.v4
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
 
 
+### Нормально закрытый файрвол
+
+```ruby
+# ---- INPUT (входящие соединения) ----
+iptables -P INPUT DROP # политика по умолчанию (default policy)
+iptables -A INPUT -i lo -j ACCEPT  # Разрешить localhost
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT  # Ответы на разрешённые запросы
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # SSH
+
+# ---- OUTPUT (исходящие соединения) ----
+iptables -P OUTPUT ACCEPT # политика по умолчанию (default policy)
+
+# ---- FORWARD (транзитные соединения) ----
+iptables -P FORWARD DROP # политика по умолчанию (default policy)
+```
+
 ### Состояние пакетов
 
 | Команды | Описание |
