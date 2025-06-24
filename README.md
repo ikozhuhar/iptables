@@ -54,6 +54,25 @@ iptables -nvL --line
 iptables -nvL INPUT --line
 ```
 
+```ruby
+sudo iptables -S
+# Допустим в данном выводе мы нашли правило
+-A INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
+# Удаляем найденное правило
+sudo iptables -D INPUT -i eth0 -p tcp --dport 443 -j ACCEPT
+
+# Удаление по номеру правила в цепочке
+sudo iptables -vnL --line
+# -D имя_цепочки номер
+sudo iptables -D INPUT 5
+
+# Удаление всех правил в цепочки INPUT
+sudo iptables -F INPUT
+
+# Удаления правил во всех цепочках
+sudo iptables -F
+```
+
 
 Примеры:
 
