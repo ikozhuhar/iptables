@@ -131,12 +131,13 @@ iptables -D INPUT 9
 # Сохранить правила (если используется iptables-persistent или аналоги)
 iptables-save > /etc/iptables/rules.v4
 sudo netfilter-persistent save
-
 ```
+
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
 
+
 <br>
-:white_check_mark: Нормально закрытый файрвол  
+:white_check_mark: _Нормально закрытый файрвол_
 
 ```ruby
 # ---- INPUT (входящие соединения) ----
