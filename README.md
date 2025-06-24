@@ -111,6 +111,15 @@ iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 ```
 
 
+:white_check_mark: _Сохранение правил_
+
+```ruby
+# Сохранить правила (если используется iptables-persistent или аналоги)
+iptables-save > /etc/iptables/rules.v4
+sudo netfilter-persistent save
+```
+
+
 :white_check_mark: _Создание правил_
 
 ```ruby
@@ -136,10 +145,6 @@ iptables -A INPUT -s X.X.X.X -j ACCEPT
 
 # Разрешить весь исходящий трафик на определённый IP
 iptables -A OUTPUT -d X.X.X.X -j ACCEPT
-
-# Сохранить правила (если используется iptables-persistent или аналоги)
-iptables-save > /etc/iptables/rules.v4
-sudo netfilter-persistent save
 ```
 
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
