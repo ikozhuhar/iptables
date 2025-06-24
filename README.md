@@ -91,7 +91,7 @@ iptables -A INPUT -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
 ```
 
 
-:white_check_mark: _Правила перенаправления_
+:white_check_mark: _Перенаправление_
 
 ```ruby
 # Трафик tcp на порт 80 перенаправить на порт 8080
@@ -101,7 +101,7 @@ iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
 ```
 
-:white_check_mark: _Правила отклонения трафика_
+:white_check_mark: _Отклонение трафика_
 
 ```ruby
 iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
