@@ -138,7 +138,6 @@ sudo netfilter-persistent save
 <br>
 :white_check_mark: Нормально закрытый файрвол  
 
-
 ```ruby
 # ---- INPUT (входящие соединения) ----
 iptables -P INPUT DROP # политика по умолчанию (default policy)
