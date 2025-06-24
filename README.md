@@ -141,7 +141,7 @@ sudo netfilter-persistent save
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
 
 
-### Нормально закрытый файрвол
+### :white_check_mark: Нормально закрытый файрвол
 
 ```ruby
 # ---- INPUT (входящие соединения) ----
