@@ -114,9 +114,14 @@ iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 :white_check_mark: _Сохранение правил_
 
 ```ruby
-# Сохранить правила (если используется iptables-persistent или аналоги)
+# Временно
 iptables-save > /etc/iptables/rules.v4
 sudo netfilter-persistent save
+
+# Постоянно
+apt install iptables-persistent netfilter-persistent
+netfilter-persistent save
+netfilter-persistent start
 ```
 
 
@@ -177,20 +182,6 @@ iptables -P FORWARD DROP # политика по умолчанию (default pol
 | `UNTRACKED` | пакет был помечен как неотслеживаемый в таблице raw |
 
 
-### Сохранение правил в iptables
-
-_Временно:_
-```ruby
-iptables-save > ./iptables.rules
-iptables-restore < ./iptables.rules
-```
-
-_Постоянно:_
-```ruby
-apt install iptables-persistent netfilter-persistent
-netfilter-persistent save
-netfilter-persistent start
-```
 
 ### ipset
 
