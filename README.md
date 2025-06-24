@@ -54,6 +54,9 @@ iptables -nvL --line
 iptables -nvL INPUT --line
 ```
 
+
+:white_check_mark: _Удаление правил_
+
 ```ruby
 sudo iptables -S
 # Допустим в данном выводе мы нашли правило
