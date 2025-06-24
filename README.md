@@ -47,6 +47,7 @@
 ```ruby
 # Посмотреть правила
 iptables -nvL --line
+iptables -nvL INPUT --line
 iptables-save
 
 # Разрешить пинг
