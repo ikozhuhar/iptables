@@ -101,6 +101,14 @@ iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
 ```
 
+:white_check_mark: _Правила отклонения трафика_
+
+```ruby
+iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
+iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+```
 
 
 :white_check_mark: _Создание правил_
@@ -128,12 +136,6 @@ iptables -A INPUT -s X.X.X.X -j ACCEPT
 
 # Разрешить весь исходящий трафик на определённый IP
 iptables -A OUTPUT -d X.X.X.X -j ACCEPT
-
-# Отклонить трафик и вернуть сообщение
-iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
-iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
-iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
-iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
 
 # Сохранить правила (если используется iptables-persistent или аналоги)
 iptables-save > /etc/iptables/rules.v4
