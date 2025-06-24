@@ -44,6 +44,17 @@
 | `RETURN` | выйти из цепочки |
 
 Примеры:
+
+:white_check_mark: _Посмотреть правила_
+
+```ruby
+# Посмотреть правила
+iptables -S
+iptables -nvL --line
+iptables -nvL INPUT --line
+```
+
+
 ```ruby
 # Посмотреть правила
 iptables -nvL --line
