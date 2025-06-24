@@ -77,6 +77,32 @@ sudo iptables -F
 ```
 
 
+:white_check_mark: _Установка правил в определенной позиции_
+
+```ruby
+# Поставить правило в седьмую позицию используем ключ -I в правиле
+iptables -I INPUT 7 -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
+
+# Ставим правило на второе место в списке
+iptables -I INPUT 2 -i lo -j ACCEPT
+
+# Поставить правило в конец цепочки 
+iptables -A INPUT -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
+```
+
+
+:white_check_mark: _Правила перенаправления_
+
+```ruby
+# Трафик tcp на порт 80 перенаправить на порт 8080
+iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+# Трафик tcp на порт 9022 транслировать на адрес 192.168.56.6 и порт 22
+iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
+```
+
+
+
 :white_check_mark: _Создание правил_
 
 ```ruby
@@ -108,25 +134,6 @@ iptables -A INPUT -s 10.26.95.20 -j REJECT --reject-with tcp-reset
 iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
 iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
 iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
-
-# Поставить правило в седьмую позицию используем ключ -I в правиле
-iptables -I INPUT 7 -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
-
-# Поставить правило в конец цепочки 
-iptables -A INPUT -i eno1 -p tcp -m multiport --dports 8400:8408 -j ACCEPT
-
-# Трафик tcp на порт 80 перенаправить на порт 8080
-iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
-
-# Трафик tcp на порт 9022 транслировать на адрес 192.168.56.6 и порт 22
-iptables -t nat -A PREROUTING -p tcp --dport 9022 -j DNAT --to 192.168.56.6:22
-
-# Ставим правило на второе место в списке
-iptables -I INPUT 2 -i lo -j ACCEPT
-
-# Удаляем правило. Сначала смотрим номер, а далее по номеру удаляем
-iptables -nvL --line
-iptables -D INPUT 9
 
 # Сохранить правила (если используется iptables-persistent или аналоги)
 iptables-save > /etc/iptables/rules.v4
