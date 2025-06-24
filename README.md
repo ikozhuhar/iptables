@@ -77,14 +77,9 @@ sudo iptables -F
 ```
 
 
-Примеры:
+:white_check_mark: _Создание правил_
 
 ```ruby
-# Посмотреть правила
-iptables -nvL --line
-iptables -nvL INPUT --line
-iptables-save
-
 # Разрешить пинг
 iptables -A INPUT -p icmp -j ACCEPT
 # Запретить ответ на пинг
@@ -140,8 +135,8 @@ sudo netfilter-persistent save
 ```
 ![image](https://github.com/user-attachments/assets/ae627047-2a90-4dfa-bfc9-ad0601c08e41)
 
-
-:white_check_mark: **Нормально закрытый файрвол**
+<br>
+:white_check_mark: Нормально закрытый файрвол
 
 ```ruby
 # ---- INPUT (входящие соединения) ----
