@@ -43,7 +43,7 @@
 | `LOG` | записать в лог |
 | `RETURN` | выйти из цепочки |
 
-Примеры:
+
 
 :white_check_mark: _Посмотреть правила_
 
@@ -54,6 +54,8 @@ iptables -nvL --line
 iptables -nvL INPUT --line
 ```
 
+
+Примеры:
 
 ```ruby
 # Посмотреть правила
