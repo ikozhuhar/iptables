@@ -169,6 +169,39 @@ iptables -P OUTPUT ACCEPT # политика по умолчанию (default po
 
 # ---- FORWARD (транзитные соединения) ----
 iptables -P FORWARD DROP # политика по умолчанию (default policy)
+
+
+
+
+# ---- INPUT (входящие соединения) ----
+sudo iptables -P INPUT DROP                                                                      # политика по умолчанию (default policy)
+sudo iptables -A INPUT -i lo -j ACCEPT                                                           # Разрешаем локальный интерфейс
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT                      # Разрешаем локальный интерфейс и established-соединения
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP                                    # Разрешаем локальный интерфейс и established-соединения
+sudo iptables -A INPUT -p tcp --dport 22 -s 192.168.1.100 -m conntrack --ctstate NEW -j ACCEPT   # SSH с ограничением по IP (замените 192.168.1.100 на ваш IP)
+sudo iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT                    # Веб-серверы
+sudo iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW -j ACCEPT                   # Веб-серверы
+sudo iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT                                # ICMP (пинг)
+
+# ---- OUTPUT (исходящие соединения) ----
+iptables -P OUTPUT ACCEPT                                                                        # политика по умолчанию (default policy)
+
+# ---- FORWARD (транзитные соединения) ----
+iptables -P FORWARD DROP                                                                         # политика по умолчанию (default policy)
+
+* -m conntrack - указывает, что правило использует МОДУЛЬ conntrack(connection tracking) для проверки состояния соединения (например, NEW, ESTABLISHED, RELATED, INVALID и др.).
+* --ctstate - определяет, какие состояния соединений должны соответствовать правилу (например, NEW, ESTABLISHED, RELATED)
+
+
+
+
+
+
+
+
+
+
+
 ```
 
 ### Состояние пакетов
