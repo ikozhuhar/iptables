@@ -159,21 +159,6 @@ iptables -A OUTPUT -d X.X.X.X -j ACCEPT
 
 ```ruby
 # ---- INPUT (входящие соединения) ----
-iptables -P INPUT DROP # политика по умолчанию (default policy)
-iptables -A INPUT -i lo -j ACCEPT  # Разрешить localhost
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT  # Ответы на разрешённые запросы
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # SSH
-
-# ---- OUTPUT (исходящие соединения) ----
-iptables -P OUTPUT ACCEPT # политика по умолчанию (default policy)
-
-# ---- FORWARD (транзитные соединения) ----
-iptables -P FORWARD DROP # политика по умолчанию (default policy)
-
-
-
-
-# ---- INPUT (входящие соединения) ----
 sudo iptables -P INPUT DROP                                                                      # политика по умолчанию (default policy)
 sudo iptables -A INPUT -i lo -j ACCEPT                                                           # Разрешаем локальный интерфейс
 sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT                      # Разрешаем локальный интерфейс и established-соединения
@@ -184,23 +169,13 @@ sudo iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW -j ACCEPT  
 sudo iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT                                # ICMP (пинг)
 
 # ---- OUTPUT (исходящие соединения) ----
-iptables -P OUTPUT ACCEPT                                                                        # политика по умолчанию (default policy)
+sudo iptables -P OUTPUT ACCEPT                                                                   # политика по умолчанию (default policy)
 
 # ---- FORWARD (транзитные соединения) ----
-iptables -P FORWARD DROP                                                                         # политика по умолчанию (default policy)
+sudo iptables -P FORWARD DROP                                                                    # политика по умолчанию (default policy)
 
 * -m conntrack - указывает, что правило использует МОДУЛЬ conntrack(connection tracking) для проверки состояния соединения (например, NEW, ESTABLISHED, RELATED, INVALID и др.).
 * --ctstate - определяет, какие состояния соединений должны соответствовать правилу (например, NEW, ESTABLISHED, RELATED)
-
-
-
-
-
-
-
-
-
-
 
 ```
 
