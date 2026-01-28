@@ -229,3 +229,4 @@ iptables -I PREROUTING -t raw -m set --match-set ddos src -j DROP
 
 
 https://interface31.ru/tech_it/2021/02/nastraivaem-port-knocking-v-linux-debian-ubuntu.html
+https://telegra.ph/Hvatit-guglit-sintaksis-Vsya-baza-iptables-v-odnom-poste-01-24
